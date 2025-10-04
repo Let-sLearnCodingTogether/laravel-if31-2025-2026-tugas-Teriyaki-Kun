@@ -8,13 +8,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EnsureRoleMidware
 {
-    /**
+     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next,string $role): Response
     {
+        if ($request->user()->role != $role){
+            return response()->json([
+                'message' => 'Role Anda Tidak Memiliki Akses',
+                'data' => null
+            ],403);
+        }
         return $next($request);
     }
 }
