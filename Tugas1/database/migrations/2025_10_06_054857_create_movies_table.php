@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('user');
+        Schema::create('movies', function (Blueprint $table) {
+            $table->id('movie_id');
+            $table->string('title');
+            $table->string('director');
+            $table->string('genre');
+            $table->year('release_year');
+            $table->timestamps();
         });
-    }
-
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('movies');
     }
 };

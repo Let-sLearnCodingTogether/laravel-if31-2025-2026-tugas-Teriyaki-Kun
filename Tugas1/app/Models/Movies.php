@@ -15,4 +15,6 @@ class Movies extends Model
     ];
 
     
+
+
 }
