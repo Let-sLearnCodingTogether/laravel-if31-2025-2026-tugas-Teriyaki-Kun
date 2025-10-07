@@ -14,7 +14,4 @@ class Movies extends Model
         'release_year'
     ];
 
-    
-
-
 }

@@ -13,6 +13,20 @@ Route::middleware('guest')->group(function(){
 
 });
 
+Route::middleware(['auth:sanctum','role:admin'])->group(function(){
+    Route::post('/logout',[AuthController::class,'logout']);
+    Route::get('/users',[UserManagementController::class,'index']);
+    Route::get('/role',[UserManagementController::class,'role']);
+    Route::apiResource('/movies',MoviesController::class);
+});
+
+Route::middleware(['auth:sanctum','role:user'])->group(function(){
+    Route::post('/logout',[AuthController::class,'logout']);
+    Route::get('/role',[UserManagementController::class,'role']);
+    Route::get('/movies',[MoviesController::class,'index']);
+    Route::get('/movies/{movie}',[MoviesController::class,'show']);
+});
+
 
 
 Route::get('/user', function(Request $request){
