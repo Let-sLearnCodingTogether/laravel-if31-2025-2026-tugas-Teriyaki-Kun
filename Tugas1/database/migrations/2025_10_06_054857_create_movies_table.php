@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('genre');
             $table->year('release_year');
             $table->timestamps();
+            $table->string('status');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }
 
